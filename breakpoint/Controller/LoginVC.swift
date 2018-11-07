@@ -24,24 +24,30 @@ class LoginVC: UIViewController {
         
         if emailTxtField.text != nil  && passwordTxtField.text != nil{
             AuthService.instannce.loginUser(userEmail: emailTxtField.text!, password: passwordTxtField.text!) { (success, loginError) in
-                if success{
+                if success {
                     self.dismiss(animated: true, completion: nil)
-                }else{
+                    return
+                } else {
                     print(String(describing:loginError?.localizedDescription))
                 }
-            }
-            
-            
-            AuthService.instannce.registerUser(userEmail: emailTxtField.text!, password: passwordTxtField.text!) { (success, registrationError) in
-                if success{
-                    AuthService.instannce.loginUser(userEmail: self.emailTxtField.text!, password: self.passwordTxtField.text!, userLoginComptite: { (success, nil)  in
-                        print("successfully register user")
-                    })
-                 
-                }else{
-                    print(String(describing:registrationError?.localizedDescription))
+                
+                AuthService.instannce.registerUser(withEmail: self.emailTxtField.text!, andPassword: self.passwordTxtField.text!) { (success, registrationError) in
+                    if success {
+                        AuthService.instannce.loginUser(userEmail: self.emailTxtField.text!, password: self.passwordTxtField.text!, userLoginComptite: { (success, nil)  in
+                            print("successfully register user")
+                        })
+                        
+                        self.dismiss(animated: true, completion: nil)
+                        
+                    } else {
+                        print(String(describing:registrationError?.localizedDescription))
+                    }
                 }
+                
             }
+            
+            
+            
         }
     }
     
