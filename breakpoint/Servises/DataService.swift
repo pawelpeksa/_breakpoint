@@ -81,7 +81,7 @@ class Dataservice{
     func getEmail(forSearchQuary quary:String, handler: @escaping (_ emailArray:[String])->()){
         var emailArray = [String]()
         REF_USERS.observe(.value) { (userSnapshot) in
-            guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else {return}
+            guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
             for user in userSnapshot{
                 let email = user.childSnapshot(forPath: "email").value as! String
                 if email.contains(quary) == true && email != Auth.auth().currentUser?.email{
@@ -91,6 +91,28 @@ class Dataservice{
             }
             handler(emailArray)
         }
+    }
+    
+    func getIds(fromUserName names:[String], handler: @escaping (_ uidArray:[String])->()){
+        
+        REF_USERS.observe(DataEventType.value) { (userSnapshot) in
+            
+            var idArray = [String]()
+            guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
+            for user in userSnapshot{
+                let email = user.childSnapshot(forPath: "email").value as! String
+                if names.contains(email){
+                    idArray.append(user.key)
+                }
+            }
+            handler(idArray)
+        }
+        
+    }
+    
+    func createGroup(title:String,description:String, usersId:[String], handler: @escaping (_ isgroupCreated: Bool) -> ()){
+        REF_GROUPS.childByAutoId().updateChildValues([ "title" : title , "description": description, "members" : usersId])
+        handler(true)
     }
 }
 

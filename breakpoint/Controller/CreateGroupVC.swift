@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateGroupVC: UIViewController {
     
     var emailArray = [String]()
     var choosenUsersArray = [String]()
-
+    
     @IBOutlet weak var titleTxtField: insetTextField!
     
     
@@ -34,7 +35,7 @@ class CreateGroupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         emailSearchTxtField.delegate = self
@@ -52,13 +53,29 @@ class CreateGroupVC: UIViewController {
                 self.tableView.reloadData()
             }
             
-           
+            
         }
     }
     
     
-
+    
     @IBAction func doneBtnWasPressed(_ sender: UIButton) {
+        if titleTxtField.text != "" && descriptionTxtField.text != ""{
+            Dataservice.instance.getIds(fromUserName: choosenUsersArray) { (idsArray) in
+                var usersId = idsArray
+                usersId.append((Auth.auth().currentUser?.uid)!)
+                
+                Dataservice.instance.createGroup(title: self.titleTxtField.text!, description: self.descriptionTxtField.text!, usersId: usersId) { (groupCreated) in
+                    if groupCreated {
+                        self.dismiss(animated: true, completion: nil)
+                    }else{
+                        print("Group could not be created")
+                    }
+                }
+                
+            }
+        }
+        
     }
     
     @IBAction func closeBtnWasPressed(_ sender: UIButton) {
@@ -87,11 +104,11 @@ extension CreateGroupVC:UITableViewDelegate,UITableViewDataSource{
         
         if choosenUsersArray.contains(emailArray[indexPath.row]){
             cell.configureCel(profileImage: profileImg!, email: emailArray[indexPath.row], isSelected: true) }else{
-             cell.configureCel(profileImage: profileImg!, email: emailArray[indexPath.row], isSelected: false)
+            cell.configureCel(profileImage: profileImg!, email: emailArray[indexPath.row], isSelected: false)
         }
         return cell
         
-    
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at:indexPath) as? UserCell else{return}
