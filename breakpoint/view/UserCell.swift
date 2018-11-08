@@ -9,7 +9,9 @@
 import UIKit
 
 class UserCell: UITableViewCell {
-
+    
+    var isShowing = false
+    
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var checkImg: UIImageView!
     @IBOutlet weak var emailLbl: UILabel!
@@ -26,8 +28,19 @@ class UserCell: UITableViewCell {
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        if selected {
+            if isShowing == false{
+                checkImg.isHidden = false
+                isShowing = true
+                
+            }else{
+                checkImg.isHidden = true
+                isShowing = false
+            }
+            
+        }
+        
     }
-
+    
 }
