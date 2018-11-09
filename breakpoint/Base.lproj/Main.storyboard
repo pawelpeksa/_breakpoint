@@ -487,7 +487,7 @@
         <!--Group FeedVC-->
         <scene sceneID="i0C-Zi-BL2">
             <objects>
-                <viewController id="GDe-4b-wOJ" customClass="GroupFeedVC" customModule="breakpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupFeedVC" id="GDe-4b-wOJ" customClass="GroupFeedVC" customModule="breakpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MeN-0a-wHB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,7 +495,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JS1-Ru-rST">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="_groupTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Orn-9V-xk2">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_groupTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Orn-9V-xk2">
                                         <rect key="frame" x="87.5" y="34.5" width="200" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Xgg-9f-g3R"/>
@@ -505,7 +505,7 @@
                                         <color key="textColor" red="0.56078431370000004" green="0.81176470590000005" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHy-aZ-Vh7">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHy-aZ-Vh7">
                                         <rect key="frame" x="20" y="34" width="12" height="22"/>
                                         <state key="normal" image="backIcon"/>
                                         <connections>
@@ -515,6 +515,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.16862745100000001" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="cHy-aZ-Vh7" firstAttribute="top" secondItem="JS1-Ru-rST" secondAttribute="top" constant="34" id="5I0-kf-VGD"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="A5k-hd-1Jx"/>
                                     <constraint firstItem="Orn-9V-xk2" firstAttribute="centerX" secondItem="JS1-Ru-rST" secondAttribute="centerX" id="QaD-7y-SDR"/>
                                     <constraint firstItem="cHy-aZ-Vh7" firstAttribute="leading" secondItem="JS1-Ru-rST" secondAttribute="leading" constant="20" id="Vuf-KH-Asc"/>
