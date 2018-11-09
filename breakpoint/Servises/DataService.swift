@@ -39,7 +39,7 @@ class Dataservice{
         REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
             guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else {return}
             for user in userSnapshot {
-               if user.key == uid {
+                if user.key == uid {
                     handler(user.childSnapshot(forPath: "email").value as! String)
                 }
             }
@@ -87,7 +87,7 @@ class Dataservice{
                 if email.contains(quary) == true && email != Auth.auth().currentUser?.email{
                     emailArray.append(email)
                 }
-
+                
             }
             handler(emailArray)
         }
@@ -113,6 +113,36 @@ class Dataservice{
     func createGroup(title:String,description:String, usersId:[String], handler: @escaping (_ isgroupCreated: Bool) -> ()){
         REF_GROUPS.childByAutoId().updateChildValues([ "title" : title , "description": description, "members" : usersId])
         handler(true)
+    }
+    
+    
+    func getAllGroups(handler:@escaping (_ groupsArray:[Group])->()){
+        var groupsArray = [Group]()
+        REF_GROUPS.observeSingleEvent(of: .value) { (groupSnapshot) in
+            
+            guard let groupSnapshot = groupSnapshot.children.allObjects as? [DataSnapshot] else {return}
+            
+            for group in groupSnapshot {
+                
+                let memberArray = group.childSnapshot(forPath: "members").value as! [String]
+                if memberArray.contains((Auth.auth().currentUser?.uid)!){
+                    
+                    let title = group.childSnapshot(forPath: "title").value as! String
+                    let description = group.childSnapshot(forPath: "description").value as! String
+                    
+                    
+                    let group = Group(title: title, descrioption: description, key: group.key, groupCount: memberArray.count, members: memberArray)
+                    
+                    groupsArray.append(group)
+                    
+                }
+                
+            }
+            handler(groupsArray)
+            
+        }
+        
+        
     }
 }
 

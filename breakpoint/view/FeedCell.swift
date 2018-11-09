@@ -25,5 +25,5 @@ class FeedCell: UITableViewCell {
         self.messageContentLbl.text = messageContentLbl
         
     }
-    
+
 }
