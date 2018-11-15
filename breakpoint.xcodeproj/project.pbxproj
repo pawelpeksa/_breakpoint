@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0422BFDA21998F1800AE3F80 /* UIImgCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422BFD921998F1800AE3F80 /* UIImgCache.swift */; };
 		044821742188B23900DD61DB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044821732188B23900DD61DB /* DataService.swift */; };
 		045C43B52188AAE1006EC41B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C43B42188AAE1006EC41B /* AppDelegate.swift */; };
 		045C43B72188AAE1006EC41B /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C43B62188AAE1006EC41B /* FeedVC.swift */; };
@@ -41,7 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0422BFD921998F1800AE3F80 /* UIImgCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImgCache.swift; sourceTree = "<group>"; };
 		044821732188B23900DD61DB /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		045C43B12188AAE0006EC41B /* breakpoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = breakpoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045C43B42188AAE1006EC41B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 				04CFC083218B4AFA0095F369 /* UIViewEX.swift */,
 				04CA3100219763EF00455518 /* UIViewControllerExt.swift */,
 				04CA310221976E5D00455518 /* MeVC_handlersExt.swift */,
-				0422BFD921998F1800AE3F80 /* UIImgCache.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -330,7 +327,6 @@
 				04A0D6042189F719002A0AA5 /* AuthVC.swift in Sources */,
 				04C477E02194511000F3679B /* GroupCell.swift in Sources */,
 				04A0D6062189F7A3002A0AA5 /* insetTextField.swift in Sources */,
-				0422BFDA21998F1800AE3F80 /* UIImgCache.swift in Sources */,
 				04CA3101219763EF00455518 /* UIViewControllerExt.swift in Sources */,
 				04CA31052197829E00455518 /* User.swift in Sources */,
 				04C43E8F218A0239000359B0 /* AuthServise.swift in Sources */,
