@@ -10,17 +10,17 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
+let MAXIMUM_PHOTO_SIZE:Int64 = 1024*1024*10
+
 class MeVC: UIViewController {
     
     
     @IBOutlet weak var profileImg: UIImageView!
-    
     @IBOutlet weak var emailLbl: UILabel!
-    
-    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    let imageCache = NSCache<NSString, AnyObject>()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,43 +34,22 @@ class MeVC: UIViewController {
         self.emailLbl.text = Auth.auth().currentUser?.email
         profileImg.layer.cornerRadius = profileImg.frame.height / 2
         profileImg.layer.masksToBounds = true
-        
         showSpinner()
-
-        ImageService.instance.getUserImageId(uid: (Auth.auth().currentUser?.uid)!) { (downloadedImgId) in
-            
-            
-             guard let downloadedImgId = downloadedImgId else { return }
-        
-            
-            if let imageFromCache = self.imageCache.object(forKey: (downloadedImgId as AnyObject) as! NSString) as? UIImage {
-                self.setImageAndHideSpinner(imageFromCache)
-                return
-            }
-        
-            let profileImageRef = Storage.storage().reference().child("profileImg/\(downloadedImgId)")
-            profileImageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) -> Void in
-                if (error != nil) {
-                    print(error as Any)
-                } else {
-                    
-                    guard let data = data else { return }
-                    guard let image = UIImage(data: data) else { return }
-                    
-                    self.imageCache.setObject(image, forKey: downloadedImgId as NSString)
-                    
-                    DispatchQueue.main.async {
-                        self.setImageAndHideSpinner(image)
-                    }
-                }
-            }
-        }
+        setUpProfilePhoto()
     }
     
-    func setImageAndHideSpinner(_ image:UIImage) {
-        self.profileImg.image = image
-        self.hideSpinner()
+    func setUpProfilePhoto() {
+        
+        ImageService.instance.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
+            if let image = image {
+                self.profileImg.image = image
+            }
+            
+            self.hideSpinner()
+        }
+
     }
+    
     
     func showSpinner() {
         spinner.isHidden = false
@@ -81,7 +60,7 @@ class MeVC: UIViewController {
         self.spinner.isHidden = true
         self.spinner.stopAnimating()
     }
-  
+    
     
     @IBAction func signOutBtnWasPressed(_ sender: Any) {
         

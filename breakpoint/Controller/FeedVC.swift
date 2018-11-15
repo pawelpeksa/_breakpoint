@@ -8,10 +8,12 @@
 
 import UIKit
 import Lottie
+import FirebaseStorage
 
 class FeedVC: UIViewController {
     
     var messageArray = [Message]()
+    var image = UIImage(named: "defaultProfileImage")
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,6 +23,7 @@ class FeedVC: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,6 +33,8 @@ class FeedVC: UIViewController {
             self.tableView.reloadData()
         }
     }
+
+    
 
 }
 
@@ -44,11 +49,47 @@ extension FeedVC : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell") as? FeedCell else { return UITableViewCell ()}
-        let image = UIImage(named: "defaultProfileImage")
+       
         let message = messageArray[indexPath.row]
         
+        
+        ImageService.instance.getUserImageId(uid:message.senderId) { (downloadedImgId) in
+            
+            
+            guard let downloadedImgId = downloadedImgId else { return }
+            
+//
+//            if let imageFromCache = self.imageCache.object(forKey: (downloadedImgId as AnyObject) as! NSString) as? UIImage {
+//                self.setImageAndHideSpinner(imageFromCache)
+//                return
+//            }
+            
+            let profileImageRef = Storage.storage().reference().child("profileImg/\(downloadedImgId)")
+            profileImageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) -> Void in
+                if (error != nil) {
+                    print(error as Any)
+                } else {
+                    
+                    guard let data = data else { return }
+                    guard let image = UIImage(data: data) else { return }
+                    
+//                    self.imageCache.setObject(image, forKey: downloadedImgId as NSString)
+                    
+                    DispatchQueue.main.async {
+                        cell.profileImage.image = image
+
+                    }
+                }
+            }
+        }
+        
+        
         Dataservice.instance.getUserName(uid: message.senderId) { (returnedUserName) in
-             cell.configureCell(profileImage: image!, emailLbl: returnedUserName, messageContentLbl: message.content)
+            
+            
+            
+            
+            cell.configureCell(profileImage:self.image! , emailLbl: returnedUserName, messageContentLbl: message.content)
         }
         
        

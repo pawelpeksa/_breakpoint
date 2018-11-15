@@ -36,6 +36,7 @@ class Dataservice{
         return _REF_FEED
     }
     
+    let currentUser = Auth.auth().currentUser?.uid
     
     func getUserName(uid:String, handler: @escaping (_ userName:String) -> ()){
         
@@ -49,6 +50,9 @@ class Dataservice{
         }
     }
     
+
+    
+    
     func createDBUser(uid:String,userData: Dictionary<String,AnyObject>){
         REF_USERS.child(uid).setValue(userData)
     }
@@ -57,7 +61,7 @@ class Dataservice{
     func uploadPost(withMessage message:String, withUnicID uid:String, withGroupKey groupKey:String?, sendComplete: @escaping (_ status:Bool)->()){
         
         if groupKey != nil{
-            // send to groups reff
+           
             REF_GROUPS.child(groupKey!).child("messages").childByAutoId().updateChildValues(["content": message,"senderId":uid] )
             
             sendComplete(true)
@@ -90,6 +94,8 @@ class Dataservice{
     }
     
     
+    
+    
     func getAllfeedMessages(handler: @escaping (_ message: [Message]) -> ()){
         
         var messageArray = [Message]()
@@ -105,6 +111,8 @@ class Dataservice{
             handler(messageArray)
         }
     }
+    
+
     
     func getEmail(forSearchQuary quary:String, handler: @escaping (_ emailArray:[String])->()){
         var emailArray = [String]()
@@ -137,6 +145,12 @@ class Dataservice{
         }
         
     }
+    
+
+    
+    
+    
+    
     func getEmailForGroup(group:Group, handler: @escaping (_ emailArray:[String])->()){
         var emailArray = [String]()
         REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in

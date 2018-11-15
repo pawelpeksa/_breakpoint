@@ -14,6 +14,8 @@ import FirebaseStorage
 class ImageService{
     
     static let instance = ImageService()
+    let imageCache = NSCache<NSString, AnyObject>()
+ 
     
     
     
@@ -87,7 +89,50 @@ class ImageService{
         
     }
     
-  
-   
+    // Function uses cache
+    func downloadImgData(downloadedImgId:String, handler: @escaping(_ downloadedImg:UIImage?)->()){
+        if let imageFromCache = self.imageCache.object(forKey: (downloadedImgId as AnyObject) as! NSString) as? UIImage {
+            handler(imageFromCache)
+            return
+        }
+        
+        let profileImageRef = Storage.storage().reference().child("profileImg/\(downloadedImgId)")
+        
+        profileImageRef.getData(maxSize:MAXIMUM_PHOTO_SIZE) { (data, error) -> Void in
+            if (error != nil) {
+                print(error as Any)
+                handler(nil)
+            } else {
+                
+                guard let data = data else { return }
+                guard let image = UIImage(data: data) else { return }
+                
+                self.imageCache.setObject(image, forKey: downloadedImgId as NSString)
+                handler(image)
+            }
+        }
+        
+    }
+    
+    func getImage(ForUserID uid :String, handler: @escaping (_ image:UIImage?)->() ){
+        ImageService.instance.getUserImageId(uid: uid) { (downloadedImgId) in
+            
+            guard let downloadedImgId = downloadedImgId else {
+                handler(nil)
+                return
+            }
+            
+            ImageService.instance.downloadImgData(downloadedImgId: downloadedImgId, handler: { (image) in
+                if let image = image {
+                    handler(image)
+                    return
+                }
+                handler(nil)
+            })
+            
+        }
+    }
+    
+    
 }
 
