@@ -16,23 +16,6 @@ class Group{
     public private (set) var _groupCount:Int
     public private (set) var _members:[String]
     
-//    var groupTitle:String{
-//        return _groupTitle
-//    }
-//    var groupDescrioption:String{
-//        return _groupDescrioption
-//    }
-//    var key:String{
-//        return _key
-//    }
-//
-//    var groupCount:Int{
-//        return _groupCount
-//    }
-//    var members:[String]{
-//        return _members
-//    }
-    
     
     init(title:String, descrioption:String,key: String, groupCount:Int,members:[String]){
      self._groupTitle = title

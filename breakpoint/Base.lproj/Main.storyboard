@@ -200,10 +200,19 @@
                                         <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="jZN-GD-Jgh">
+                                        <rect key="frame" x="172.5" y="65" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="eWc-5L-syK"/>
+                                            <constraint firstAttribute="width" constant="30" id="fSY-eM-Gdd"/>
+                                        </constraints>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25490196078431371" green="0.27058823529411763" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="p5x-gl-6I2" firstAttribute="top" secondItem="1nY-QQ-K0e" secondAttribute="top" constant="30" id="9Am-Z6-E3U"/>
+                                    <constraint firstItem="jZN-GD-Jgh" firstAttribute="centerX" secondItem="1nY-QQ-K0e" secondAttribute="centerX" id="Sz6-tM-eKj"/>
+                                    <constraint firstItem="jZN-GD-Jgh" firstAttribute="centerY" secondItem="p5x-gl-6I2" secondAttribute="centerY" id="U8k-Hk-dIg"/>
                                     <constraint firstItem="p5x-gl-6I2" firstAttribute="centerX" secondItem="1nY-QQ-K0e" secondAttribute="centerX" id="Wu5-ng-bN8"/>
                                     <constraint firstItem="Pfg-2o-DNp" firstAttribute="leading" secondItem="1nY-QQ-K0e" secondAttribute="leading" constant="65" id="Xfw-sR-wvr"/>
                                     <constraint firstAttribute="height" constant="275" id="kdi-c9-hva"/>
@@ -246,11 +255,12 @@
                     <connections>
                         <outlet property="emailLbl" destination="Pfg-2o-DNp" id="OBH-gX-wA6"/>
                         <outlet property="profileImg" destination="p5x-gl-6I2" id="teY-wk-QAi"/>
+                        <outlet property="spinner" destination="jZN-GD-Jgh" id="vXy-bG-EFg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E87-W6-C6y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1546" y="0.0"/>
+            <point key="canvasLocation" x="1618" y="-10"/>
         </scene>
         <!--Create PostVC-->
         <scene sceneID="aI7-DA-EcY">
@@ -524,14 +534,14 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BMn-ml-RRV">
-                                <rect key="frame" x="0.0" y="102.5" width="375" height="564.5"/>
+                                <rect key="frame" x="0.0" y="102.5" width="375" height="504.5"/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.16862745100000001" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.25490196079999999" green="0.27058823529999998" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="feedCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="100" id="sVA-lg-SKf" customClass="GroupFeedCell" customModule="breakpoint" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupFeedCellIdentifier" rowHeight="100" id="sVA-lg-SKf" userLabel="groupFeedCell" customClass="GroupFeedCell" customModule="breakpoint" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sVA-lg-SKf" id="ypH-KP-sfw">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="groupFeedCell" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sVA-lg-SKf" id="ypH-KP-sfw">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -572,7 +582,7 @@
                                                 <constraint firstItem="Kbs-ZV-pN5" firstAttribute="leading" secondItem="ypH-KP-sfw" secondAttribute="leadingMargin" constant="10" id="tqO-iL-hdu"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.16078431369999999" green="0.16862745100000001" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="contentLbl" destination="Byw-mI-iJx" id="2aP-Xd-R0W"/>
                                             <outlet property="emailLbl" destination="0W8-ZY-EEA" id="qkj-cp-S0u"/>
@@ -630,13 +640,13 @@
                             <constraint firstItem="e3c-Ff-Stt" firstAttribute="bottom" secondItem="gGo-0c-SeD" secondAttribute="bottom" id="BeY-Q6-MkQ"/>
                             <constraint firstItem="hxi-tc-nB7" firstAttribute="top" secondItem="JS1-Ru-rST" secondAttribute="bottom" constant="8" id="Hc4-2W-dK6"/>
                             <constraint firstItem="hxi-tc-nB7" firstAttribute="leading" secondItem="gGo-0c-SeD" secondAttribute="leading" id="YWG-Fw-cPV"/>
-                            <constraint firstItem="BMn-ml-RRV" firstAttribute="top" secondItem="hxi-tc-nB7" secondAttribute="bottom" constant="8" id="Ygq-Fa-gIp"/>
                             <constraint firstItem="e3c-Ff-Stt" firstAttribute="leading" secondItem="gGo-0c-SeD" secondAttribute="leading" id="ZMO-v6-8Ua"/>
+                            <constraint firstItem="e3c-Ff-Stt" firstAttribute="top" secondItem="BMn-ml-RRV" secondAttribute="bottom" id="b0A-Wj-FNn"/>
                             <constraint firstItem="JS1-Ru-rST" firstAttribute="top" secondItem="MeN-0a-wHB" secondAttribute="top" id="diM-v7-P1N"/>
                             <constraint firstAttribute="trailing" secondItem="e3c-Ff-Stt" secondAttribute="trailing" id="emk-ft-lON"/>
-                            <constraint firstItem="BMn-ml-RRV" firstAttribute="bottom" secondItem="gGo-0c-SeD" secondAttribute="bottom" id="f5b-JJ-noJ"/>
                             <constraint firstItem="BMn-ml-RRV" firstAttribute="leading" secondItem="gGo-0c-SeD" secondAttribute="leading" id="jGf-DN-xft"/>
                             <constraint firstItem="BMn-ml-RRV" firstAttribute="trailing" secondItem="gGo-0c-SeD" secondAttribute="trailing" id="jfU-uV-czI"/>
+                            <constraint firstItem="BMn-ml-RRV" firstAttribute="top" secondItem="hxi-tc-nB7" secondAttribute="bottom" constant="8" id="mG8-M9-1le"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gGo-0c-SeD"/>
                     </view>
@@ -646,7 +656,7 @@
                         <outlet property="messageTxtField" destination="6Ti-Z2-0TO" id="sza-VY-B4z"/>
                         <outlet property="sendBtn" destination="0um-EZ-rAS" id="CT6-9b-JdO"/>
                         <outlet property="sendMessageView" destination="e3c-Ff-Stt" id="9GB-OL-MIC"/>
-                        <outlet property="tableView" destination="BMn-ml-RRV" id="gn5-pz-mLl"/>
+                        <outlet property="tableView" destination="BMn-ml-RRV" id="Ziq-Me-lqW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7g-St-Bz8" userLabel="First Responder" sceneMemberID="firstResponder"/>

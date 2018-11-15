@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 
 let DB_BASE = Database.database().reference()
 
@@ -34,6 +35,8 @@ class Dataservice{
     var REF_FEED:DatabaseReference{
         return _REF_FEED
     }
+    
+    
     func getUserName(uid:String, handler: @escaping (_ userName:String) -> ()){
         
         REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
@@ -50,10 +53,14 @@ class Dataservice{
         REF_USERS.child(uid).setValue(userData)
     }
     
+    
     func uploadPost(withMessage message:String, withUnicID uid:String, withGroupKey groupKey:String?, sendComplete: @escaping (_ status:Bool)->()){
         
         if groupKey != nil{
             // send to groups reff
+            REF_GROUPS.child(groupKey!).child("messages").childByAutoId().updateChildValues(["content": message,"senderId":uid] )
+            
+            sendComplete(true)
             
         } else {
             _REF_FEED.childByAutoId().updateChildValues(["content" : message, "sender":uid])
@@ -61,6 +68,27 @@ class Dataservice{
         }
         
     }
+    
+    
+    func getAllMessagesfor(desiredGroup:Group,handler: @escaping (_ messageArray: [Message]) -> () ){
+        
+        var groupMessageArray =  [Message]()
+        REF_GROUPS.child(desiredGroup._key).child("messages").observeSingleEvent(of: .value) { (groupMessageSnapshot) in
+            guard let groupMessageSnapshot = groupMessageSnapshot.children.allObjects as? [DataSnapshot]
+                else {return}
+            for groupMessage in groupMessageSnapshot{
+                let content = groupMessage.childSnapshot(forPath: "content").value as! String
+                let sender = groupMessage.childSnapshot(forPath: "senderId").value as! String
+                
+                let groupMessage = Message(content: content, senderId: sender)
+                groupMessageArray.append(groupMessage)
+                
+            }
+            handler(groupMessageArray)
+        }
+        
+    }
+    
     
     func getAllfeedMessages(handler: @escaping (_ message: [Message]) -> ()){
         
@@ -121,10 +149,7 @@ class Dataservice{
             }
             handler(emailArray)
         }
-        
-        
-        
-        
+      
         
     }
     
@@ -159,10 +184,17 @@ class Dataservice{
             handler(groupsArray)
             
         }
-        
-        
     }
-}
+    
+
+    
+    
+
+
+ }
+    
+    
+
 
 
 

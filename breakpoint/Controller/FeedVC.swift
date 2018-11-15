@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class FeedVC: UIViewController {
     
@@ -25,10 +26,6 @@ class FeedVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         Dataservice.instance.getAllfeedMessages { (returnedMessagesArray) in
             
-            if returnedMessagesArray == nil{
-                print("The was found nil in returned Array")
-            return
-            }
             self.messageArray = returnedMessagesArray.reversed()
             self.tableView.reloadData()
         }

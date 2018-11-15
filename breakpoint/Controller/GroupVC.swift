@@ -59,7 +59,7 @@ extension GroupVC: UITableViewDelegate, UITableViewDataSource{
             return
         }
         groupFeedVC.initData(forGroup: groupsArray[indexPath.row])
-        present(groupFeedVC,animated: true,completion: nil)
+        presentDetail(groupFeedVC)
     }
 }
 
