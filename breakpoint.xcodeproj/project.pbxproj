@@ -33,6 +33,7 @@
 		04CFC082218B35A60095F369 /* CreatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFC081218B35A60095F369 /* CreatePostVC.swift */; };
 		04CFC084218B4AFA0095F369 /* UIViewEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFC083218B4AFA0095F369 /* UIViewEX.swift */; };
 		04CFC086218B56AA0095F369 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFC085218B56AA0095F369 /* FeedCell.swift */; };
+		04E883CC219F5741003DAE19 /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E883CB219F5741003DAE19 /* RoundImageView.swift */; };
 		04F74A1421958317005D7ADD /* GroupFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F74A1321958317005D7ADD /* GroupFeedCell.swift */; };
 		04F74A162195836F005D7ADD /* GroupFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F74A152195836F005D7ADD /* GroupFeedVC.swift */; };
 		04F88078219AE2DF00F64A70 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F88077219AE2DF00F64A70 /* ImageService.swift */; };
@@ -68,6 +69,7 @@
 		04CFC081218B35A60095F369 /* CreatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostVC.swift; sourceTree = "<group>"; };
 		04CFC083218B4AFA0095F369 /* UIViewEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewEX.swift; sourceTree = "<group>"; };
 		04CFC085218B56AA0095F369 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		04E883CB219F5741003DAE19 /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		04F74A1321958317005D7ADD /* GroupFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupFeedCell.swift; sourceTree = "<group>"; };
 		04F74A152195836F005D7ADD /* GroupFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupFeedVC.swift; sourceTree = "<group>"; };
 		04F88077219AE2DF00F64A70 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				04B9562C2193703300F05E62 /* UserCell.swift */,
 				04C477DF2194511000F3679B /* GroupCell.swift */,
 				04F74A1321958317005D7ADD /* GroupFeedCell.swift */,
+				04E883CB219F5741003DAE19 /* RoundImageView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				045C43AE2188AAE0006EC41B /* Frameworks */,
 				045C43AF2188AAE0006EC41B /* Resources */,
 				6448DB23687B0A78E5221862 /* [CP] Embed Pods Frameworks */,
+				90CA43F5CE4CFCF3B1A593C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -278,7 +282,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-breakpoint/Pods-breakpoint-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
@@ -286,7 +292,9 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
@@ -295,6 +303,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-breakpoint/Pods-breakpoint-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90CA43F5CE4CFCF3B1A593C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-breakpoint/Pods-breakpoint-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-breakpoint/Pods-breakpoint-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F1E863314BD3BDE9618477CC /* [CP] Check Pods Manifest.lock */ = {
@@ -342,6 +372,7 @@
 				04CFC082218B35A60095F369 /* CreatePostVC.swift in Sources */,
 				045C43B52188AAE1006EC41B /* AppDelegate.swift in Sources */,
 				045C43B72188AAE1006EC41B /* FeedVC.swift in Sources */,
+				04E883CC219F5741003DAE19 /* RoundImageView.swift in Sources */,
 				044821742188B23900DD61DB /* DataService.swift in Sources */,
 				04CFC084218B4AFA0095F369 /* UIViewEX.swift in Sources */,
 				04F88078219AE2DF00F64A70 /* ImageService.swift in Sources */,

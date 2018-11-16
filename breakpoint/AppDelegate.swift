@@ -8,17 +8,55 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
+    
+      var window: UIWindow?
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        
+        if let error = error {
+            print("Failed to log into Google \(error)")
+    
+            return
+        }
+        print("Successfuly loged into Google, \(user!)")
+        guard let idToken = user.authentication.idToken else { return }
+        guard let accessToken = user.authentication.accessToken else { return }
+        
+        
+        guard user.authentication != nil else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken,accessToken: accessToken)
+        
+        Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
+            if let err = error{
+                print("Failed to create a Firebase user account\(err) ")
+            }
+            guard let uid = user?.user.uid else{
+                return
+            }
+            print("Successfuly loged in Firebase with google account", uid)
+            
+        }
+        //
+    }
+    
+   
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+        func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+            -> Bool {
+            return GIDSignIn.sharedInstance().handle(url,sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,annotation: [:])
+        }
+        
         
         if Auth.auth().currentUser == nil {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

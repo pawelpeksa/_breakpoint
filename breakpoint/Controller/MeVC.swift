@@ -32,8 +32,6 @@ class MeVC: UIViewController {
         super.viewWillAppear(true)
         
         self.emailLbl.text = Auth.auth().currentUser?.email
-        profileImg.layer.cornerRadius = profileImg.frame.height / 2
-        profileImg.layer.masksToBounds = true
         showSpinner()
         setUpProfilePhoto()
     }

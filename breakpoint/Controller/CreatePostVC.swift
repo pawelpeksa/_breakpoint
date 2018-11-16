@@ -26,6 +26,7 @@ class CreatePostVC: UIViewController {
         super.viewDidLoad()
         textView.delegate = self
         sendBtn.bindToKeyBoard()
+
         
         
 
@@ -35,6 +36,12 @@ class CreatePostVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.emailLbl.text = Auth.auth().currentUser?.email
+        
+        ImageService.instance.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
+            if let image = image {
+                self.profileImg.image = image
+            }
+        }
     }
 
     @IBAction func sendBtnWasPressed(_ sender: Any) {

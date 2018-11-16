@@ -67,7 +67,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-hL-fPk">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-hL-fPk" customClass="RoundImageView" customModule="breakpoint" customModuleProvider="target">
                                                     <rect key="frame" x="25" y="21" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="iqs-Gf-Wg6"/>
@@ -184,7 +184,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nY-QQ-K0e">
                                 <rect key="frame" x="0.0" y="70" width="375" height="275"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="p5x-gl-6I2">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="p5x-gl-6I2" customClass="RoundImageView" customModule="breakpoint" customModuleProvider="target">
                                         <rect key="frame" x="137.5" y="30" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="UJm-5X-ntq"/>
@@ -306,7 +306,7 @@
                                     <constraint firstItem="XTF-Qn-eUb" firstAttribute="centerY" secondItem="V8Z-8T-QMK" secondAttribute="centerY" id="wsS-xb-YVX"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="yTg-0m-OaJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="yTg-0m-OaJ" customClass="RoundImageView" customModule="breakpoint" customModuleProvider="target">
                                 <rect key="frame" x="20" y="90" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="NJb-vn-eQL"/>

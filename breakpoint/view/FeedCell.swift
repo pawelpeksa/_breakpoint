@@ -11,11 +11,7 @@ import UIKit
 class FeedCell: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
-    
-  
     @IBOutlet weak var emailLbl: UILabel!
-    
-   
     @IBOutlet weak var messageContentLbl: UILabel!
     
     
