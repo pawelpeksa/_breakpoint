@@ -24,6 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
             return
         }
         print("Successfuly loged into Google, \(user!)")
+        
+
+        window?.makeKeyAndVisible()
+        let presentedVC = window?.rootViewController?.presentedViewController
+        presentedVC?.dismiss(animated: true, completion: nil)
+        
+        
         guard let idToken = user.authentication.idToken else { return }
         guard let accessToken = user.authentication.accessToken else { return }
         
@@ -34,11 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
         Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
             if let err = error{
                 print("Failed to create a Firebase user account\(err) ")
+            
             }
             guard let uid = user?.user.uid else{
                 return
             }
             print("Successfuly loged in Firebase with google account", uid)
+            
             
         }
         //
@@ -50,12 +59,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
         // Override point for customization after application launch.
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
+        GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
         func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
             -> Bool {
             return GIDSignIn.sharedInstance().handle(url,sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,annotation: [:])
         }
+        
         
         
         if Auth.auth().currentUser == nil {
