@@ -104,8 +104,15 @@ class ImageService{
                 handler(nil)
             } else {
                 
-                guard let data = data else { return }
-                guard let image = UIImage(data: data) else { return }
+                guard let data = data else {
+                    handler(nil)
+                    return
+                }
+                
+                guard let image = UIImage(data: data) else {
+                    handler(nil)
+                    return
+                }
                 
                 self.imageCache.setObject(image, forKey: downloadedImgId as NSString)
                 handler(image)
