@@ -7,23 +7,19 @@
 //
 
 import UIKit
-import Lottie
 import FirebaseStorage
 
 class FeedVC: UIViewController {
     
-    var messageArray = [Message]()
-    let defaultProfileImage = UIImage(named: "defaultProfileImage")
-
+    private var messageArray = [Message]()
+    
+    private let defaultProfileImage = UIImage(named: "defaultProfileImage")
+    
     @IBOutlet weak var tableView: UITableView!
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+        self.setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,67 +29,39 @@ class FeedVC: UIViewController {
             self.tableView.reloadData()
         }
     }
-}
     
-
+    func setupView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+}
 
 extension FeedVC : UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell") as? FeedCell else { return UITableViewCell ()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell") as? FeedCell else {
+            return UITableViewCell ()
+        }
        
         let message = messageArray[indexPath.row]
         
-        
-        
-//
-
-//
-//        ImageService.instance.getUserImageId(uid:message.senderId) { (downloadedImgId) in
-//
-//
-//            guard let downloadedImgId = downloadedImgId else { return }
-//
-////
-////            if let imageFromCache = self.imageCache.object(forKey: (downloadedImgId as AnyObject) as! NSString) as? UIImage {
-////                self.setImageAndHideSpinner(imageFromCache)
-////                return
-////            }
-//
-//            let profileImageRef = Storage.storage().reference().child("profileImg/\(downloadedImgId)")
-//            profileImageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) -> Void in
-//                if (error != nil) {
-//                    print(error as Any)
-//                } else {
-//
-//                    guard let data = data else { return }
-//                    guard let image = UIImage(data: data) else { return }
-//
-////                    self.imageCache.setObject(image, forKey: downloadedImgId as NSString)
-//
-//                    DispatchQueue.main.async {
-//                        cell.profileImage.image = image
-//
-//                    }
-//                }
-//            }
-//        }
-//
-        ImageService.instance.getImage(ForUserID: message.senderId) { (image) in
+        ImageService.instance.getImage(ForUserID: message.senderId) { [weak self] (image) in
             
             var profileImage:UIImage
             
             if let image = image {
                 profileImage = image
             } else {
-                profileImage = self.defaultProfileImage!
+                profileImage = (self?.defaultProfileImage)!
             }
             
             Dataservice.instance.getUserName(uid: message.senderId) { (returnedUserName) in

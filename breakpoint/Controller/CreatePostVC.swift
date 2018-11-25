@@ -11,42 +11,24 @@ import Firebase
 
 class CreatePostVC: UIViewController {
     
-
     @IBOutlet weak var profileImg: UIImageView!
-    
-    
     @IBOutlet weak var emailLbl: UILabel!
-    
     @IBOutlet weak var textView: UITextView!
-    
-    
     @IBOutlet weak var sendBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.delegate = self
-        sendBtn.bindToKeyBoard()
-
-        
-        
-
-        // Do any additional setup after loading the view.
+        self.setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.emailLbl.text = Auth.auth().currentUser?.email
-        
-        ImageService.instance.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
-            if let image = image {
-                self.profileImg.image = image
-            }
-        }
+        self.configureView()
     }
-
+    
     @IBAction func sendBtnWasPressed(_ sender: Any) {
         
-        if textView.text != nil && textView.text != "Say somethink here"{
+        if self.isTextValid() {
             sendBtn.isEnabled = false
             Dataservice.instance.uploadPost(withMessage: textView.text, withUnicID: (Auth.auth().currentUser?.uid)!, withGroupKey: nil) { (isComplete) in
                 if isComplete {
@@ -57,15 +39,30 @@ class CreatePostVC: UIViewController {
                 }
             }
         }
-       
     }
-    
     
     @IBAction func closeBtnWasPressed(_ sender: Any) {
-     dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-
+    private func setupView(){
+        self.textView.delegate = self
+        self.sendBtn.bindToKeyBoard()
+    }
+    
+    private func configureView(){
+        self.emailLbl.text = Auth.auth().currentUser?.email
+        
+        ImageService.instance.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
+            if let image = image {
+                self.profileImg.image = image
+            }
+        }
+    }
+    
+    private func isTextValid() -> Bool{
+        return textView.text != nil && textView.text != "Say somethink here"
+    }
 }
 
 extension CreatePostVC:UITextViewDelegate{

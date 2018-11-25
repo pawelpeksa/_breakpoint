@@ -9,83 +9,66 @@
 import UIKit
 import Firebase
 
-class CreateGroupVC: UIViewController {
+class CreateGroupVC: UIViewController, UITextFieldDelegate {
     
-    var emailArray = [String]()
-    var choosenUsersArray = [String]()
+    private var emailArray = [String]()
+    private var choosenUsersArray = [String]()
     
     @IBOutlet weak var titleTxtField: insetTextField!
-    
-    
     @IBOutlet weak var descriptionTxtField: insetTextField!
-    
-    
     @IBOutlet weak var emailSearchTxtField: insetTextField!
-    
     @IBOutlet weak var groupMemberLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var doneBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         doneBtn.isHidden = true
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        emailSearchTxtField.delegate = self
-        emailSearchTxtField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        self.setupView()
     }
     
-    
     @objc func textFieldDidChange(){
-        if emailSearchTxtField.text == ""{
+        if emailSearchTxtField.text == "" {
             emailArray = []
             tableView.reloadData()
         }else{
-            Dataservice.instance.getEmail(forSearchQuary: emailSearchTxtField.text!) { (returnedEmailArray) in
-                self.emailArray = returnedEmailArray
-                self.tableView.reloadData()
+            Dataservice.instance.getEmail(forSearchQuary: emailSearchTxtField.text!) { [weak self] (returnedEmailArray) in
+                self?.emailArray = returnedEmailArray
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             }
-            
-            
         }
     }
     
-    
-    
     @IBAction func doneBtnWasPressed(_ sender: UIButton) {
-        if titleTxtField.text != "" && descriptionTxtField.text != ""{
-            Dataservice.instance.getIds(fromUserName: choosenUsersArray) { (idsArray) in
+        if isGroupInfoValid(){
+            Dataservice.instance.getIds(fromUserName: choosenUsersArray) { [weak self] (idsArray) in
                 var usersId = idsArray
                 usersId.append((Auth.auth().currentUser?.uid)!)
-                
-                Dataservice.instance.createGroup(title: self.titleTxtField.text!, description: self.descriptionTxtField.text!, usersId: usersId) { (groupCreated) in
-                    if groupCreated {
-                        self.dismiss(animated: true, completion: nil)
-                    }else{
-                        print("Group could not be created")
-                    }
-                }
-                
+                self?.createGroup(usersId: usersId)
             }
         }
-        
     }
     
     @IBAction func closeBtnWasPressed(_ sender: UIButton) {
-        
         dismiss(animated: true, completion: nil)
     }
     
+    private func setupView(){
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.emailSearchTxtField.delegate = self
+        self.emailSearchTxtField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
     
-    
-    
+    private func isGroupInfoValid() -> Bool{
+        return titleTxtField.text != "" && descriptionTxtField.text != ""
+    }
 }
 
 extension CreateGroupVC:UITableViewDelegate,UITableViewDataSource{
@@ -107,9 +90,8 @@ extension CreateGroupVC:UITableViewDelegate,UITableViewDataSource{
             cell.configureCel(profileImage: profileImg!, email: emailArray[indexPath.row], isSelected: false)
         }
         return cell
-        
-        
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at:indexPath) as? UserCell else{return}
         if !choosenUsersArray.contains(cell.emailLbl.text!){
@@ -125,10 +107,15 @@ extension CreateGroupVC:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    private func createGroup(usersId:[String]){
+        Dataservice.instance.createGroup(title: self.titleTxtField.text!, description: self.descriptionTxtField.text!, usersId: usersId) { [weak self] (groupCreated) in
+            if groupCreated {
+                self?.dismiss(animated: true, completion: nil)
+            }else{
+                print("Group could not be created")
+            }
+        }
+    }
     
 }
-extension CreateGroupVC : UITextFieldDelegate{
-    
-    
-    
-}
+

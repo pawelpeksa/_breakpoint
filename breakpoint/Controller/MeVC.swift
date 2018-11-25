@@ -14,18 +14,14 @@ let MAXIMUM_PHOTO_SIZE:Int64 = 1024*1024*10
 
 class MeVC: UIViewController {
     
-    
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var emailLbl: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlerSelectProfileImgView)))
-        profileImg.isUserInteractionEnabled = true
+        self.setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,8 +32,12 @@ class MeVC: UIViewController {
         setUpProfilePhoto()
     }
     
+    func setupView(){
+        self.profileImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlerSelectProfileImgView)))
+        self.profileImg.isUserInteractionEnabled = true
+    }
+    
     func setUpProfilePhoto() {
-        
         ImageService.instance.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
             if let image = image {
                 self.profileImg.image = image
@@ -48,7 +48,6 @@ class MeVC: UIViewController {
 
     }
     
-    
     func showSpinner() {
         spinner.isHidden = false
         spinner.startAnimating()
@@ -58,7 +57,6 @@ class MeVC: UIViewController {
         self.spinner.isHidden = true
         self.spinner.stopAnimating()
     }
-    
     
     @IBAction func signOutBtnWasPressed(_ sender: Any) {
         

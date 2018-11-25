@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController{
     
     @IBOutlet weak var emailTxtField: insetTextField!
     
@@ -16,38 +16,20 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        emailTxtField.delegate = self
-        passwordTxtField.delegate = self
     }
+    
     @IBAction func signInButtonWasPressed(_ sender: Any) {
-        
-        if emailTxtField.text != nil  && passwordTxtField.text != nil{
-            AuthService.instannce.loginUser(userEmail: emailTxtField.text!, password: passwordTxtField.text!) { (success, loginError) in
-                if success {
-                    self.dismiss(animated: true, completion: nil)
-                    return
-                } else {
-                    print(String(describing:loginError?.localizedDescription))
-                }
-                
-                AuthService.instannce.registerUser(withEmail: self.emailTxtField.text!, andPassword: self.passwordTxtField.text!) { (success, registrationError) in
-                    if success {
-                        AuthService.instannce.loginUser(userEmail: self.emailTxtField.text!, password: self.passwordTxtField.text!, userLoginComptite: { (success, nil)  in
-                            print("successfully register user")
-                        })
-                        
-                        self.dismiss(animated: true, completion: nil)
-                        
-                    } else {
-                        print(String(describing:registrationError?.localizedDescription))
-                    }
-                }
-                
+        if self.isInputValid() {
+            
+            guard let userEmail = self.emailTxtField.text else {
+                return
             }
             
+            guard let userPassword = self.passwordTxtField.text else {
+                return
+            }
             
-            
+            self.loginAndMaybeRegister(userEmail: userEmail, userPassword: userPassword)
         }
     }
     
@@ -56,7 +38,44 @@ class LoginVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-}
-extension LoginVC: UITextFieldDelegate{
+    private func isInputValid() -> Bool {
+        return emailTxtField.text != nil && passwordTxtField.text != nil
+    }
+    
+    private func loginAndMaybeRegister(userEmail:String, userPassword:String) {
+        AuthService.instannce.loginUser(userEmail: userEmail, password: userPassword) { [weak self] (success, loginError) in
+            if success {
+                self?.hideLoginVC()
+                return
+            } else {
+                print(String(describing:loginError?.localizedDescription))
+            }
+    
+            self?.tryToRegister(userEmail:userEmail, userPassword:userPassword)
+            
+        }
+        
+    }
+    
+    private func tryToRegister(userEmail:String, userPassword:String) {
+        
+        AuthService.instannce.registerUser(withEmail: userEmail, andPassword: userPassword) { [weak self] (success, registrationError) in
+            if success {
+                AuthService.instannce.loginUser(userEmail: userEmail, password: userPassword, userLoginCompleted: { [weak self](success, nil)  in
+                    self?.hideLoginVC()
+                    print("successfully register user")
+                })
+            } else {
+                print(String(describing:registrationError?.localizedDescription))
+            }
+        }
+    }
+    
+    private func hideLoginVC() {
+        DispatchQueue.main.async {
+             self.dismiss(animated: true, completion: nil)
+        }
+    }
     
 }
+

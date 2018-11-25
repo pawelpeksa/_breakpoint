@@ -12,13 +12,13 @@ class GroupVC: UIViewController {
     
     var groupsArray = [Group]()
     
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.setupView()
     }
 
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         Dataservice.instance.REF_GROUPS.observe(.value) { (snapshot) in
@@ -29,13 +29,14 @@ class GroupVC: UIViewController {
         }
     }
 
-    @IBOutlet weak var tableView: UITableView!
-    
+    func setupView(){
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
 
 }
 
 extension GroupVC: UITableViewDelegate, UITableViewDataSource{
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupsArray.count
@@ -54,6 +55,7 @@ extension GroupVC: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let groupFeedVC = storyboard?.instantiateViewController(withIdentifier: "GroupFeedVC") as? GroupFeedVC else {
             return

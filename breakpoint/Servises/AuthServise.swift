@@ -26,14 +26,14 @@ class AuthService{
         }
     }
     
-    func loginUser(userEmail email :String, password:String, userLoginComptite: @escaping (_ status:Bool, _ error:Error?) ->()){
+    func loginUser(userEmail email :String, password:String, userLoginCompleted: @escaping (_ status:Bool, _ error:Error?) ->()){
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
           if error != nil{
-                userLoginComptite(false,error)
+                userLoginCompleted(false, error)
                 return
             }
-            userLoginComptite(true,nil)
+            userLoginCompleted(true, nil)
         }
         
     }

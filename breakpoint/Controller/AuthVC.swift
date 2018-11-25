@@ -10,15 +10,11 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-class AuthVC: UIViewController,GIDSignInUIDelegate {
+class AuthVC: UIViewController, GIDSignInUIDelegate {
    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
-        // Do any additional setup after loading the view.
+        self.setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,6 +35,11 @@ class AuthVC: UIViewController,GIDSignInUIDelegate {
     }
     
     @IBOutlet weak var facebookSignInWasPressed: UIButton!
+    
+    func setupView(){
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
+    }
     
 }
 
