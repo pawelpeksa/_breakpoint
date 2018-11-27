@@ -17,7 +17,7 @@
 		045C43CF2188AE86006EC41B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045C43CE2188AE86006EC41B /* GoogleService-Info.plist */; };
 		04A0D6022189F6E7002A0AA5 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D6012189F6E7002A0AA5 /* LoginVC.swift */; };
 		04A0D6042189F719002A0AA5 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D6032189F719002A0AA5 /* AuthVC.swift */; };
-		04A0D6062189F7A3002A0AA5 /* insetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D6052189F7A3002A0AA5 /* insetTextField.swift */; };
+		04A0D6062189F7A3002A0AA5 /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D6052189F7A3002A0AA5 /* InsetTextField.swift */; };
 		04A0D608218A0010002A0AA5 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D607218A0010002A0AA5 /* ShadowView.swift */; };
 		04B9562721930DFF00F05E62 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9562621930DFF00F05E62 /* Message.swift */; };
 		04B9562B2193675800F05E62 /* CreateGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9562A2193675800F05E62 /* CreateGroupVC.swift */; };
@@ -53,7 +53,7 @@
 		045C43CE2188AE86006EC41B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04A0D6012189F6E7002A0AA5 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		04A0D6032189F719002A0AA5 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
-		04A0D6052189F7A3002A0AA5 /* insetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = insetTextField.swift; sourceTree = "<group>"; };
+		04A0D6052189F7A3002A0AA5 /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		04A0D607218A0010002A0AA5 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		04B9562621930DFF00F05E62 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		04B9562A2193675800F05E62 /* CreateGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVC.swift; sourceTree = "<group>"; };
@@ -112,7 +112,9 @@
 		045C43B32188AAE1006EC41B /* breakpoint */ = {
 			isa = PBXGroup;
 			children = (
-				045C43CD2188AB6B006EC41B /* Servises */,
+
+				04F7EBE321AADFED00E3C0D0 /* breakpoint.entitlements */,
+				045C43CD2188AB6B006EC41B /* Services */,
 				045C43CC2188AB60006EC41B /* Extension */,
 				045C43CB2188AB5A006EC41B /* Model */,
 				045C43CA2188AB54006EC41B /* view */,
@@ -145,7 +147,7 @@
 		045C43CA2188AB54006EC41B /* view */ = {
 			isa = PBXGroup;
 			children = (
-				04A0D6052189F7A3002A0AA5 /* insetTextField.swift */,
+				04A0D6052189F7A3002A0AA5 /* InsetTextField.swift */,
 				04A0D607218A0010002A0AA5 /* ShadowView.swift */,
 				04CFC085218B56AA0095F369 /* FeedCell.swift */,
 				04B9562C2193703300F05E62 /* UserCell.swift */,
@@ -176,14 +178,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		045C43CD2188AB6B006EC41B /* Servises */ = {
+		045C43CD2188AB6B006EC41B /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				044821732188B23900DD61DB /* DataService.swift */,
 				04C43E8E218A0239000359B0 /* AuthServise.swift */,
 				04F88077219AE2DF00F64A70 /* ImageService.swift */,
 			);
-			path = Servises;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		0AF66E905487B6CC1A921793 /* Frameworks */ = {
@@ -356,7 +358,7 @@
 				04CFC086218B56AA0095F369 /* FeedCell.swift in Sources */,
 				04A0D6042189F719002A0AA5 /* AuthVC.swift in Sources */,
 				04C477E02194511000F3679B /* GroupCell.swift in Sources */,
-				04A0D6062189F7A3002A0AA5 /* insetTextField.swift in Sources */,
+				04A0D6062189F7A3002A0AA5 /* InsetTextField.swift in Sources */,
 				04CA3101219763EF00455518 /* UIViewControllerExt.swift in Sources */,
 				04CA31052197829E00455518 /* User.swift in Sources */,
 				04C43E8F218A0239000359B0 /* AuthServise.swift in Sources */,

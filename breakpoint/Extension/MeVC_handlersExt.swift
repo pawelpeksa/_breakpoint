@@ -9,34 +9,35 @@
 import Foundation
 import UIKit
 
-extension MeVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+extension MeVC : UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    
     
     @objc func handlerSelectProfileImgView(){
+        let picker = getPicker()
+        self.presentPicker(picker: picker)
+    }
+    
+    func getPicker()->UIImagePickerController{
         let picker = UIImagePickerController()
-        
         picker.delegate = self
         picker.allowsEditing = true
+        return picker
+    }
+    
+    func presentPicker(picker:UIImagePickerController){
         present(picker, animated: true, completion: nil)
     }
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var selectedImgFromPicket: UIImage?
         
+        let selectedImgFromPicker = self.getSelectedImg(info: info)
         
-        if let editedImg = info["UIImagePickerControllerEditedImage"] as? UIImage{
-            
-            selectedImgFromPicket = editedImg
-            
-        } else if let originalImg = info["UIImagePickerControllerOriginalImage"] as? UIImage{
-            selectedImgFromPicket = originalImg
-            
-        }
-        if let selectedImg = selectedImgFromPicket{
+        if let selectedImg = selectedImgFromPicker {
             profileImg.image = selectedImg
         }
         
-        ImageService.instance.uploadData(image: profileImg.image!) { (imageUrl) in
+        imageService.uploadData(image: profileImg.image!) { (imageUrl) in
             print(imageUrl)
         }
         
@@ -46,6 +47,17 @@ extension MeVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("was canceled")
         dismiss(animated: true, completion: nil)
+    }
+    
+    func getSelectedImg(info:[String:Any])->UIImage? {
+        var selectedImgFromPicker: UIImage?
+        
+        if let editedImg = info["UIImagePickerControllerEditedImage"] as? UIImage{
+            selectedImgFromPicker = editedImg
+        } else if let originalImg = info["UIImagePickerControllerOriginalImage"] as? UIImage{
+            selectedImgFromPicker = originalImg
+        }
+        return selectedImgFromPicker
     }
     
 }

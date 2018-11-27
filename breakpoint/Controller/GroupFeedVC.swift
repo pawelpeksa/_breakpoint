@@ -34,7 +34,7 @@ class GroupFeedVC: UIViewController {
         super.viewWillAppear(true)
         groupTitleLbl.text = group?._groupTitle
         
-        Dataservice.instance.getEmailForGroup(group: group!) { [weak self] (returnedArrayEmail) in
+        Dataservice.instance.getEmailsForGroup(group: group!) { [weak self] (returnedArrayEmail) in
             self?.membersLbl.text = returnedArrayEmail.joined(separator: ", ")
         }
         

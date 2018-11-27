@@ -20,6 +20,5 @@ class GroupCell: UITableViewCell {
         self.groupTitle.text = groupTitle
         self.groupDescription.text = groupDescription
         self.membersLbl.text = "\(membersCount) members"
-        
     }
 }

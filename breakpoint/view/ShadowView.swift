@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class ShadowView: UIView {
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpView()
@@ -20,5 +21,5 @@ class ShadowView: UIView {
         self.layer.shadowRadius = 5
         self.layer.shadowColor = UIColor.black.cgColor
     }
-
 }
+

@@ -18,7 +18,7 @@ class Group{
     
     
     init(title:String, descrioption:String,key: String, groupCount:Int,members:[String]){
-     self._groupTitle = title
+        self._groupTitle = title
         self._groupDescrioption = descrioption
         self._key = key
         self._groupCount = groupCount

@@ -49,6 +49,7 @@ extension GroupVC: UITableViewDelegate, UITableViewDataSource{
         cell.configureCell(groupTitle: group._groupTitle, groupDescription: group._groupDescrioption
             , membersCount: group._members.count)
         
+        
         return cell
     }
     

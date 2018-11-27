@@ -10,13 +10,10 @@ import UIKit
 
 class RoundImageView: UIImageView {
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.layer.cornerRadius = self.frame.height / 2
         self.layer.masksToBounds = true
     }
-    
-    
+
 }
