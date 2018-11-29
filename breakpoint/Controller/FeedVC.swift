@@ -11,8 +11,9 @@ import FirebaseStorage
 
 class FeedVC: UIViewController {
     
+    var imageService:ImageService!
+    
     private var messageArray = [Message]()
-    private var imageService = ImageService()
     private let defaultProfileImage = UIImage(named: "defaultProfileImage")
     
     @IBOutlet weak var tableView: UITableView!
@@ -33,6 +34,12 @@ class FeedVC: UIViewController {
     func setupView(){
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let createPostVC = segue.destination as? CreatePostVC {
+            createPostVC.imageService = self.imageService
+        }
     }
     
 }

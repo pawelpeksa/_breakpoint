@@ -17,7 +17,7 @@ class MeVC: UIViewController {
     @IBOutlet weak var emailLbl: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    let imageService = ImageService()
+    var imageService:ImageService!
 
     override func viewDidLoad() {
         super.viewDidLoad()

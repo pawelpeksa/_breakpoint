@@ -16,7 +16,7 @@ class CreatePostVC: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     
-    let imageService = ImageService()
+    var imageService:ImageService!
     
     override func viewDidLoad() {
         super.viewDidLoad()

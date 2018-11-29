@@ -37,6 +37,7 @@
 		04F74A1421958317005D7ADD /* GroupFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F74A1321958317005D7ADD /* GroupFeedCell.swift */; };
 		04F74A162195836F005D7ADD /* GroupFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F74A152195836F005D7ADD /* GroupFeedVC.swift */; };
 		04F88078219AE2DF00F64A70 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F88077219AE2DF00F64A70 /* ImageService.swift */; };
+		E58703B821B029780022C25C /* BreakPointTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58703B721B029780022C25C /* BreakPointTabViewController.swift */; };
 		FA8DE56656298AEC7BCFB4BF /* Pods_breakpoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C739B213F2EF3F71A078D16A /* Pods_breakpoint.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		04F88077219AE2DF00F64A70 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		33715A8A774EA8A8B6B43A88 /* Pods-breakpoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-breakpoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-breakpoint/Pods-breakpoint.debug.xcconfig"; sourceTree = "<group>"; };
 		C739B213F2EF3F71A078D16A /* Pods_breakpoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_breakpoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E58703B721B029780022C25C /* BreakPointTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakPointTabViewController.swift; sourceTree = "<group>"; };
 		F1F27325FC85AA152AEE7215 /* Pods-breakpoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-breakpoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-breakpoint/Pods-breakpoint.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 				04CFC081218B35A60095F369 /* CreatePostVC.swift */,
 				04B9562A2193675800F05E62 /* CreateGroupVC.swift */,
 				04F74A152195836F005D7ADD /* GroupFeedVC.swift */,
+				E58703B721B029780022C25C /* BreakPointTabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				04F74A162195836F005D7ADD /* GroupFeedVC.swift in Sources */,
 				04F74A1421958317005D7ADD /* GroupFeedCell.swift in Sources */,
 				045C43B92188AAE1006EC41B /* GroupVC.swift in Sources */,
+				E58703B821B029780022C25C /* BreakPointTabViewController.swift in Sources */,
 				04A0D6022189F6E7002A0AA5 /* LoginVC.swift in Sources */,
 				04CA310321976E5E00455518 /* MeVC_handlersExt.swift in Sources */,
 				04A0D608218A0010002A0AA5 /* ShadowView.swift in Sources */,

@@ -88,6 +88,13 @@ class Dataservice{
         return groupMessage
     }
     
+    func createMessageWithoutId(message:DataSnapshot) -> Message{
+        let content = message.childSnapshot(forPath: "content").value as! String
+        let sender = message.childSnapshot(forPath: "sender").value as! String
+        let groupMessage = Message(content: content, senderId: sender)
+        return groupMessage
+    }
+    
     func getAllfeedMessages(handler: @escaping (_ message: [Message]) -> ()){
         
         var messageArray = [Message]()
@@ -95,7 +102,7 @@ class Dataservice{
             guard let feedMessageShapshot = feedMessageSnapshot.children.allObjects as? [DataSnapshot] else {return}
             
             for feedMessage in feedMessageShapshot {
-                let message = self.createMessage(message: feedMessage)
+                let message = self.createMessageWithoutId(message: feedMessage)
                 messageArray.append(message)
             }
             handler(messageArray)
