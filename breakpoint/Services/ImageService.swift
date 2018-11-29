@@ -11,15 +11,12 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class ImageService{
+class ImageService {
     
     static let instance = ImageService()
     let imageCache = NSCache<NSString, AnyObject>()
  
-    
-    
-    
-    
+
     func getProfileImageName()->String {
         return NSUUID().uuidString
     }
