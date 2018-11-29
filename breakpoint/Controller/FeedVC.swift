@@ -12,7 +12,7 @@ import FirebaseStorage
 class FeedVC: UIViewController {
     
     private var messageArray = [Message]()
-    
+    private var imageService = ImageService()
     private let defaultProfileImage = UIImage(named: "defaultProfileImage")
     
     @IBOutlet weak var tableView: UITableView!
@@ -37,7 +37,7 @@ class FeedVC: UIViewController {
     
 }
 
-extension FeedVC : UITableViewDelegate,UITableViewDataSource{
+extension FeedVC : UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -54,7 +54,7 @@ extension FeedVC : UITableViewDelegate,UITableViewDataSource{
        
         let message = messageArray[indexPath.row]
         
-        ImageService.instance.getImage(ForUserID: message.senderId) { [weak self] (image) in
+        self.imageService.getImage(ForUserID: message.senderId) { [weak self] (image) in
             
             var profileImage:UIImage
             

@@ -13,12 +13,11 @@ import FirebaseStorage
 let MAXIMUM_PHOTO_SIZE:Int64 = 1024*1024*10
 
 class MeVC: UIViewController {
-    let imageService = ImageService.instance
-
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var emailLbl: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-
+    
+    let imageService = ImageService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +44,7 @@ class MeVC: UIViewController {
     }
 
     func setUpProfilePhoto() {
-        ImageService.instance.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
+        self.imageService.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
             if let image = image {
                 self.profileImg.image = image
             }

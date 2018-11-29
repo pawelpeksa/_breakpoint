@@ -16,6 +16,8 @@ class CreatePostVC: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     
+    let imageService = ImageService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
@@ -53,7 +55,7 @@ class CreatePostVC: UIViewController {
     private func configureView(){
         self.emailLbl.text = Auth.auth().currentUser?.email
         
-        ImageService.instance.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
+        self.imageService.getImage(ForUserID: (Auth.auth().currentUser?.uid)!) { (image) in
             if let image = image {
                 self.profileImg.image = image
             }
