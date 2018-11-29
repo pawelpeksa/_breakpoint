@@ -112,12 +112,10 @@
 		045C43B32188AAE1006EC41B /* breakpoint */ = {
 			isa = PBXGroup;
 			children = (
-
-				04F7EBE321AADFED00E3C0D0 /* breakpoint.entitlements */,
 				045C43CD2188AB6B006EC41B /* Services */,
 				045C43CC2188AB60006EC41B /* Extension */,
 				045C43CB2188AB5A006EC41B /* Model */,
-				045C43CA2188AB54006EC41B /* view */,
+				045C43CA2188AB54006EC41B /* View */,
 				045C43C82188AB37006EC41B /* Controller */,
 				045C43B42188AAE1006EC41B /* AppDelegate.swift */,
 				045C43BA2188AAE1006EC41B /* Main.storyboard */,
@@ -144,7 +142,7 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		045C43CA2188AB54006EC41B /* view */ = {
+		045C43CA2188AB54006EC41B /* View */ = {
 			isa = PBXGroup;
 			children = (
 				04A0D6052189F7A3002A0AA5 /* InsetTextField.swift */,
@@ -155,7 +153,7 @@
 				04F74A1321958317005D7ADD /* GroupFeedCell.swift */,
 				04E883CB219F5741003DAE19 /* RoundImageView.swift */,
 			);
-			path = view;
+			path = View;
 			sourceTree = "<group>";
 		};
 		045C43CB2188AB5A006EC41B /* Model */ = {
